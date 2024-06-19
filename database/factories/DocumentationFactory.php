@@ -101,7 +101,7 @@ class DocumentationFactory extends Factory
             'icon' => 'FaLaptopCode',
             'description' => fake()->paragraph(),
             'tags' => fake()->words(3, true),
-            'content' => json_encode($content),
+            'content' => $content,
             'user_id' => User::factory()
         ];
     }
