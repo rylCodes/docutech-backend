@@ -7,6 +7,7 @@ use App\Models\Documentation;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DocumentationResource;
 use App\Http\Requests\DocumentationRequest;
+use App\Http\Resources\DocumentationCollection;
 
 class DocumentationController extends Controller
 {
@@ -17,6 +18,7 @@ class DocumentationController extends Controller
     {
         try {
             $query = $request->input('query');
+            $pageSize = $request->input('pageSize', 6);
 
             if ($query) {
                 $documentations = Documentation::where('title', 'like', '%' . $query . '%')
@@ -26,12 +28,12 @@ class DocumentationController extends Controller
                                                 ->orWhereRaw("JSON_EXTRACT(content,'$[*].code') LIKE '%$query%'")
                                                 ->orWhere('description', 'like', '%' . $query . '%')
                                                 ->orWhere('tags', 'like', '%' . $query . '%')
-                                                ->get();
+                                                ->paginate($pageSize);
             } else {
-                $documentations = Documentation::all();
+                $documentations = Documentation::paginate($pageSize);
             }
     
-            return response()->json($documentations);
+            return new DocumentationCollection($documentations);
         } catch (\Exception $e) {
             return response()->json(['message' => 'An error occured: ' . $e->getMessage()], 500);
         }
@@ -41,7 +43,8 @@ class DocumentationController extends Controller
      * Display documentations for a specific user.
      */
     public function showByUserId(string $userId) {
-        $documentations = Documentation::where('user_id', $userId)->get();
+        $pageSize = 5;
+        $documentations = Documentation::where('user_id', $userId)->paginate($pageSize);
         return response()->json($documentations);
     }
 

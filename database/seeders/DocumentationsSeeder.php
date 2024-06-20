@@ -14,6 +14,6 @@ class DocumentationsSeeder extends Seeder
     public function run(): void
     {
         //
-        Documentation::factory(9)->create();
+        Documentation::factory(40)->create();
     }
 }

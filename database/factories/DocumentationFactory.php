@@ -86,6 +86,32 @@ class DocumentationFactory extends Factory
                 ],
             ],
             [
+                'type' => 'Header',
+                'text' => fake()->sentence(3),
+            ],
+            [
+                'type' => 'Paragraph',
+                'text' => fake()->paragraph(5),
+            ],
+            [
+                'type' => 'Code Block',
+                'language' => 'python',
+                'code' => "class CustomDataStructure:\n    def __init__(self):\n        self.data = []\n    def add_element(self, element):\n        self.data.append(element)\n    def remove_element(self, element):\n        self.data.remove(element)",
+            ],
+            [
+                'type' => 'Header',
+                'text' => fake()->sentence(3),
+            ],
+            [
+                'type' => 'Paragraph',
+                'text' => fake()->paragraph(5),
+            ],
+            [
+                'type' => 'Code Block',
+                'language' => 'python',
+                'code' => "class CustomDataStructure:\n    def __init__(self):\n        self.data = []\n    def add_element(self, element):\n        self.data.append(element)\n    def remove_element(self, element):\n        self.data.remove(element)",
+            ],
+            [
                 'type' => 'Link',
                 'url' => fake()->url(),
                 'text' => fake()->sentence(3),

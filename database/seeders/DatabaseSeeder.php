@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin123'
         ]);
 
-        Documentation::factory(5)->create([
+        Documentation::factory(15)->create([
             'user_id' => $user->id
         ]);
 
